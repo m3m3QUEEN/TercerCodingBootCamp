@@ -1,0 +1,193 @@
+body{
+    font-family: cursive;
+    margin: 0;
+    padding: 0;
+}
+
+.material-icons {
+    font-family: 'Material Icons';
+    font-weight: normal;
+    font-style: normal;
+    font-size: 24px;  /* Preferred icon size */
+    display: inline-block;
+    line-height: 1;
+    text-transform: none;
+    letter-spacing: normal;
+    word-wrap: normal;
+    white-space: nowrap;
+    direction: ltr;
+  
+    /* Support for all WebKit browsers. */
+    -webkit-font-smoothing: antialiased;
+    /* Support for Safari and Chrome. */
+    text-rendering: optimizeLegibility;
+  
+    /* Support for Firefox. */
+    -moz-osx-font-smoothing: grayscale;
+  
+    /* Support for IE. */
+    font-feature-settings: 'liga';
+  }
+
+nav{
+    background-color:#8A66B9;
+    color: aliceblue;
+    width: 100%;
+}
+
+nav .mobile {
+    display: none;
+}
+
+nav .secondary.mini .header .more button{
+    border: none;
+    color: white;
+}
+
+
+nav .logo{
+    min-width: 100px;
+    margin-left: 15px;
+}
+
+nav a{
+    color: aliceblue;
+    text-decoration: none;
+    display: block;
+    padding: 20px 25px;
+}
+nav a:hover {
+    color: aliceblue;
+    background-color:#8A66B9;
+}nav .desktop{
+    display: flex;
+    justify-content: space-between; /* Alinea horizontalmente */
+    align-items: center;
+    pad: 0 20px;
+}
+
+nav .desktop .primary,
+nav .desktop .secondary {
+    display: flex;
+}
+nav .desktop .secondary.mini{
+    display: none;
+}
+
+footer {
+    padding: 4%;
+    text-align: center;
+    text-size-adjust: initial;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #FAD1FF;
+
+}
+
+@media screen and (max-width: 400px){
+    nav .logo {
+        min-width: 100px;
+    }
+    nav .secondary.full{
+        display: none; 
+    }
+    nav .secondary.mini{
+        display: block !important ;
+    }
+    nav .secondary.mini .submenu {
+        background-color: #FFC0CB;
+        position: absolute;
+        display: none;
+        width: 85px;
+        right: 0;
+    }
+    nav .secondary.mini:hover .submenu {
+        display: block;
+    }
+}
+
+@media screen and (max-width: 300px) {
+    nav .desktop{
+        display: none;
+    }    
+    nav .mobile{
+        display: block;
+    }
+}
+
+main {
+    background-color: #FAD1FF;
+    padding: 0;
+    margin: 0;
+    font-family: cursive;
+}
+.container {
+  padding: 0 5%;
+  position: center;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-gap: 60px;
+  justify-content: center;
+  align-items: center;
+  justify-items: center;
+}
+
+.container .card{
+    margin-top: 60px;
+    background-color:#C19AF2;
+    color: white;
+    width: 300px;
+    height: 350px;
+    border-radius: 10px;
+    padding: 30px;
+    box-sizing: border-box;
+    position: relative;
+    box-sizing: border-box;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    position: center;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: nowrap;
+    transition: all o.3s ease ;
+}
+
+.main {
+    margin: 10px;
+}
+
+.product {
+    padding: 5%;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+}
+
+.product-image {
+    width: 500px;
+    margin-right: 50px;
+}
+
+.price-shop {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    margin-top: 100px;
+
+}
+
+.precio {
+    color: #8A66B9;
+}
+
+img{ 
+    width: 100%;
+}
+
+
+
+
+
