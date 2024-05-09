@@ -1,0 +1,148 @@
+body {
+    font-family: "Varela Round", sans-serif;
+    font-weight: normal;
+    font-style: normal;
+  }
+
+  *{
+    padding: 0%;
+    margin: 0%;
+  }
+  .h1 {
+    font-weight: bold;
+  }
+  nav{
+    display: flex;
+    /* justify-content: space-between; Alinea horizontalmente */
+    align-items: center;
+    flex-direction: row;
+    pad: 0 20px;
+    width: 100%;
+    height: 10vh;
+  }
+
+  .logo{
+    height: 100%;
+    width: 30%;
+  }
+
+  .logo img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .texto{
+    background-color: #defaf4;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    padding: 5px;
+
+  }
+
+  .texto p,h1 {
+    margin-left: 5px;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center; /* Alinea horizontalmente */
+    align-items: center;
+    width: 70%;
+    height: 100%;
+    flex-wrap: wrap;
+    margin-top: 50px;
+    gap: 80px;
+    margin-bottom: 150px;
+}
+main {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.redes {
+ position: fixed;
+ width: 50px;
+ top: 40vh;
+ left: 5px;
+}
+.tarjeta {
+  width: 150px;
+  height: 150px;
+}
+
+
+.tarjeta img {
+  width: 120%;
+  height: 120%;
+  object-fit: cover;
+}
+
+footer {
+  position: fixed;
+  top: 90vh;
+  width: 100%;
+  height: 15vh;
+  display: flex;
+  align-items: center;
+  background-color: white;
+  height: 10vh;
+}
+.barrabaja {
+  display: flex;
+  align-items: center;
+  font-size: 80%;
+  width: 100%;
+}
+
+.derecha {
+  display: flex;
+  align-items: flex-end;
+
+}
+
+.izquierda img {
+  width: 10%;
+  height: 10%;
+}
+
+
+
+@media (max-width: 848px) {
+
+  .redes {
+    display: none;
+  }
+
+  nav h1 {
+    font-size: 80%;
+  }
+
+  nav p {
+    font-size: 70%;
+  }
+
+  .tarjeta {
+    width: 40%;
+    height: 40%;
+  }
+
+  .tarjeta img {
+    width: 100%;
+    height: 100%;
+  }
+
+  .container {
+    display: flex;
+    justify-content: center; /* Alinea horizontalmente */
+    align-items: center;
+    width: 100vw;
+    height: 100%;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+
+
+}
