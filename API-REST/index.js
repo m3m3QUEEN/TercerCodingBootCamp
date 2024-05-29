@@ -2,6 +2,10 @@ import express from "express";
 import cors from "cors";
 import connection from "./DB/DBConnection.js";
 
+import express from 'express';
+import usersRouter from './Endpoints/Users.js';
+import connection from './DB/DBConnection.js'; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
+import 
 const app = express();
 
 app.use(express.json());
