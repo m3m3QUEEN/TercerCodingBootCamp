@@ -1,60 +1,22 @@
 // index.js
 
-import express from 'express';
-import usersRouter from './Endpoints/Users.js';
-import connection from './DB/DBConnection.js'; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
-import 
+import express from "express";
+import connection from "./DBConnection.js"; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
 const app = express();
 const port = 3000;
 
-app.use(express.json());
-app.use(cors());
+// const userRouter = require("./src/routes/usersRoutes.js");
+// Usar el router de usuarios
+import userRoutes from "./src/routes/usersRoutes.js";
+import typesRoutes from "./src/routes/typesRoutes.js";
 
-// Para propósitos de prueba, permitimos todos los orígenes
-const allowedOrigins = ['*'];
+app.use(express.json()); // Para parsear JSON en las peticiones
 
-const corsOption = {
-    origin: function(origin, callback) {
-        if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
-            callback(null, true);
-        } else {
-            callback(new Error("Not allowed origin by CORS."));
-        }
-    }
-};
+// Usar el router de usuarios
+app.use(usersRouter);
 
-app.use(cors(corsOption));
-
-app.get("/", (req, res) => {
-    res.send("API Funcionando");
-});
-
-app.get("/users", (req, res) => {
-    const query = "SELECT * FROM `Usuarios`";
-    connection.query(query, (err, results) => {
-        if (err) {
-            console.error("Error al encontrar los usuarios: " + err);
-            res.status(500).send("Error al encontrar los usuarios");
-        } else {
-            res.send(results);
-        }
-    });
-});
-
-app.post("/register", (req, res) => {
-    const { nombre, correo, contraseña, rol } = req.body;
-    const query = "INSERT INTO `Usuarios`(`nombre`, `correo`, `contraseña`, `rol`) VALUES (?,?,?,?)";
-
-    connection.query(query, [nombre, correo, contraseña, rol], (err, results) => {
-        if (err) {
-            console.error("Error al crear usuario: ", err);
-            res.status(500).send("Error al crear usuario");
-        } else {
-            res.send("Usuario creado");
-            console.log("Usuario registrado exitosamente.");
-        }
-    });
+app.listen(port, () => {
+    console.log(`Servidor corriendo en http://localhost:${port}`);
 });
 
 export default app;
-1
