@@ -1,8 +1,11 @@
-import express from "express";
-import cors from "cors";
-import connection from "./DB/DBConnection.js";
+// index.js
 
+import express from 'express';
+import usersRouter from './Endpoints/Users.js';
+import connection from './DB/DBConnection.js'; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
+import 
 const app = express();
+const port = 3000;
 
 app.use(express.json());
 app.use(cors());
@@ -14,7 +17,7 @@ const corsOption = {
     origin: function(origin, callback) {
         if (allowedOrigins.indexOf(origin) !== -1 || !origin) {
             callback(null, true);
-         } else {
+        } else {
             callback(new Error("Not allowed origin by CORS."));
         }
     }
@@ -53,7 +56,5 @@ app.post("/register", (req, res) => {
     });
 });
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-    console.log("running at port: " + PORT);
-});
+export default app;
+1
