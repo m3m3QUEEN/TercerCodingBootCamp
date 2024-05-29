@@ -1,20 +1,22 @@
 // index.js
 
-import express from 'express';
-import usersRouter from './Endpoints/Users.js';
-import connection from './DB/DBConnection.js'; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
-import 
+import express from "express";
+import connection from "./DBConnection.js"; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
 const app = express();
 const port = 3000;
 
+// const userRouter = require("./src/routes/usersRoutes.js");
+// Usar el router de usuarios
+import userRoutes from "./src/routes/usersRoutes.js";
+import typesRoutes from "./src/routes/typesRoutes.js";
+
 app.use(express.json()); // Para parsear JSON en las peticiones
 
-// Usar el router de usuarios
-app.use(usersRouter);
+app.use("/users", userRoutes);
+app.use("/types", typesRoutes);
 
 app.listen(port, () => {
-    console.log(`Servidor corriendo en http://localhost:${port}`);
+  console.log(`Servidor corriendo en http://localhost:${port}`);
 });
 
 export default app;
-1
