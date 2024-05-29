@@ -1,3 +1,7 @@
+
+import express from 'express';
+import connection from '../DB/DBConnection.js';
+
 const router = express.Router();
 
 router.get("/users", (req, res) => {
@@ -28,4 +32,4 @@ router.post("/register", (req, res) => {
 });
 
 export default router;
-1
+
