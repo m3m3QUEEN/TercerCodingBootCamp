@@ -1,3 +1,4 @@
+
 import express from 'express';
 import connection from '../DB/DBConnection.js';
 
@@ -31,3 +32,4 @@ router.post("/register", (req, res) => {
 });
 
 export default router;
+
