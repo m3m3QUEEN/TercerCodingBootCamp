@@ -19,9 +19,9 @@ router.get("/users", (req, res) => {
 
 router.post("/register", (req, res) => {
     const { EMAIL, PASSWORD, ROLE} = req.body;
-    const query = "INSERT INTO `USUARIOS`(`EMAIL`, `PASSWORD`, `ROLE`) VALUES (?,?,?)";
+    const query = "INSERT INTO `USUARIOS`(`EMAIL`, `PASSSWORD`, `ROLE`) VALUES (?,?,?)";
 
-    connection.query(query, [EMAIL, PASSWORD, ROLE], (err, results) => {
+    connection.query(query, [EMAIL, PASSSWORD, ROLE], (err, results) => {
         if (err) {
             console.error("Error al crear usuario: ", err);
             res.status(500).send("Error al crear usuario");

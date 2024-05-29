@@ -4,8 +4,8 @@ router.get("/users", (req, res) => {
     const query = "SELECT * FROM `TYPES`";
     connection.query(query, (err, results) => {
         if (err) {
-            console.error("Error al encontrar los usuarios: " + err);
-            res.status(500).send("Error al encontrar los usuarios");
+            console.error("Error al encontrar el TYPE: " + err);
+            res.status(500).send("Error al encontrar los TYPES");
         } else {
             res.send(results);
         }
@@ -13,16 +13,16 @@ router.get("/users", (req, res) => {
 });
 
 router.post("/register", (req, res) => {
-    const { EMAIL, PASSWORD, ROLE} = req.body;
-    const query = "INSERT INTO `USUARIOS`(`EMAIL`, `PASSWORD`, `ROLE`) VALUES (?,?,?)";
+    const { NAME, ELEMENT, STREGHT, WEAKNESS} = req.body;
+    const query = "INSERT INTO `USUARIOS`(`NAME`, `ELEMENT`, `STREGHT`,`WEAKNESS`) ALUES (?,?,?,?)";
 
-    connection.query(query, [EMAIL, PASSWORD, ROLE], (err, results) => {
+    connection.query(query, [NAME, ELEMENT, STREGHT, WEAKNESS], (err, results) => {
         if (err) {
-            console.error("Error al crear usuario: ", err);
-            res.status(500).send("Error al crear usuario");
+            console.error("Error al Ingresar el TYPE: ", err);
+            res.status(500).send("Error en la tabla TYPE");
         } else {
-            res.send("Usuario creado");
-            console.log("Usuario registrado exitosamente.");
+            res.send("Type creado");
+            console.log("El TYPE se ha registrado exitosamente.");
         }
     });
 });
