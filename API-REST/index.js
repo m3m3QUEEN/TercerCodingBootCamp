@@ -3,7 +3,7 @@
 import express from 'express';
 import usersRouter from './Endpoints/Users.js';
 import connection from './DB/DBConnection.js'; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
-import 
+import usersRouter from '/Endpoints/Types.js';
 const app = express();
 const port = 3000;
 
