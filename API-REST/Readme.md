@@ -1,4 +1,4 @@
-# Correcciones API REST Grupo 1
+# Correcciones API REST Grupo 1 (Correspondientes a la rama "Juan-Jose" la cual al momento de clonar el repositorio era la rama que iba mas avanzada)
 Todas las indicaciones dadas aquí nos serán las únicas que deberán corregir:
 
 ## Rutas
