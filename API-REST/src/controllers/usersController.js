@@ -1,33 +1,8 @@
-// src/controllers/usersController.js
+// endpoints/users.js
 
-import bcrypt from "bcrypt";
-import jwt from "jsonwebtoken";
-import connection from "../../DBConnection.js";
+import express from "express";
+import connection from "../../DBConnection.js"; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
 
-// Funcion para crear un nuevo usuario
-export const createUser = async (req, res) => {
-  try {
-    const { email, password, role } = req.body;
-
-    // Encriptar la contraseña
-    const hashedPassword = await bcrypt.hash(password, 10);
-
-    // Consulta para insertar un nuevo usuario en la base de datos
-    const query = "INSERT INTO `Users` (email, password, role) VALUES (?, ?, ?)";
-    connection.query(query, [email, hashedPassword, role], (err, results) => {
-      if (err) {
-        console.error("Error al crear el usuario: " + err);
-        return res.status(500).send("Error al crear el usuario");
-      }
-      res.status(201).json({ message: "Usuario creado exitosamente" });
-    });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error en el servidor" });
-  }
-};
-
-// Funcion para obtener todos los usuarios
 export const getAllUsers = async (req, res) => {
   try {
     const query = "SELECT * FROM `Users`";
@@ -102,32 +77,21 @@ export const loginUser = async (req, res) => {
 // Funcion para cerrar sesion
 export const logoutUser = async (req, res) => {
   try {
-    res.clearCookie("token");
-    res.status(200).json({ message: "Cierre de sesion exitoso" });
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Error en el servidor" });
-  }
-};
+    const { EMAIL, PASSWORD, ROLE } = req.body;
 
-export const deleteUser = async (req, res) => {
-  try {
-    const userId = req.params.id; // Asumiendo que el ID del usuario a eliminar se pasa como parámetro en la URL
-    const query = "DELETE FROM `USUARIOS` WHERE `id` = ?";
-    
-    await connection.query(query, [userId], (err, results) => {
+    const query =
+      "INSERT INTO `USUARIOS`(`EMAIL`, `PASSSWORD`, `ROLE`) VALUES (?,?,?)";
+
+    await connection.query(query, [EMAIL, PASSWORD, ROLE], (err, results) => {
       if (err) {
-        console.error("Error al eliminar el usuario: " + err);
-        res.status(500).send("Error al eliminar el usuario");
-      } else if (results.affectedRows === 0) {
-        res.status(404).send("Usuario no encontrado");
+        console.error("Error al crear usuario: ", err);
+        res.status(500).send("Error al crear usuario");
       } else {
-        res.send("Usuario eliminado exitosamente");
+        res.send("Usuario creado");
+        console.log("Usuario registrado exitosamente.");
       }
     });
   } catch (error) {
-    console.error(error, "error");
+    console.error(error);
   }
 };
-
-

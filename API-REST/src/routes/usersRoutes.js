@@ -1,15 +1,18 @@
-// src/routes/usersRoutes.js
 
 import express from "express";
+import { adminRolValidation } from "../utils/usersMiddleware.js";
+import { authenticateToken } from "../utils/usersMiddleware.js";
 
-import { createUser, getAllUsers } from "../controllers/usersController.js";
+import {
+  createUser,
+  getAllUsers,
+  login,
+  logout,
+} from "../controllers/usersController.js";
 
 const router = express.Router();
 
-// Ruta para obtener todos los usuarios
 router.get("/", getAllUsers);
-
-// Ruta para registrar un nuevo usuario
 router.post("/register", createUser);
 
 export default router;
