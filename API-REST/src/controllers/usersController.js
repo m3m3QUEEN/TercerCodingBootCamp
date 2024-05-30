@@ -42,3 +42,28 @@ export const createUser = async (req, res) => {
     console.error(error);
   }
 };
+
+export const deleteUser = async (req, res) => {
+  try {
+    const userId = req.params.id; // Asumiendo que el ID del usuario a eliminar se pasa como parámetro en la URL
+    const query = "DELETE FROM `USUARIOS` WHERE `id` = ?";
+    
+    await connection.query(query, [userId], (err, results) => {
+      if (err) {
+        console.error("Error al eliminar el usuario: " + err);
+        res.status(500).send("Error al eliminar el usuario");
+      } else if (results.affectedRows === 0) {
+        res.status(404).send("Usuario no encontrado");
+      } else {
+        res.send("Usuario eliminado exitosamente");
+      }
+    });
+  } catch (error) {
+    console.error(error, "error");
+    res.status(500).json({
+      mensaje: "error en la petición a la base de datos",
+    });
+  }
+};
+
+
