@@ -3,7 +3,7 @@ import connection from "../../DBConnection.js";
 
 export const getAllTypes = async (req, res) => {
   try {
-    const query = "SELECT * FROM `TYPES`";
+    const query = "SELECT * FROM `Types`";
     connection.query(query, (err, results) => {
       if (err) {
         console.error("Error al encontrar el TYPE: " + err);
@@ -21,7 +21,7 @@ export const createType = async (req, res) => {
   try {
     const { NAME, ELEMENT, STREGHT, WEAKNESS } = req.body;
     const query =
-      "INSERT INTO `USUARIOS`(`NAME`, `ELEMENT`, `STREGHT`,`WEAKNESS`) ALUES (?,?,?,?)";
+      "INSERT INTO `Types`(`NAME`, `ELEMENT`, `STRENGHT`,`WEAKNESS`) VALUES (?,?,?,?)";
 
     connection.query(
       query,
@@ -40,3 +40,7 @@ export const createType = async (req, res) => {
     console.error(error);
   }
 };
+
+
+
+   
