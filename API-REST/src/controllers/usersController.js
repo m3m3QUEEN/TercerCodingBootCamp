@@ -127,9 +127,6 @@ export const deleteUser = async (req, res) => {
     });
   } catch (error) {
     console.error(error, "error");
-    res.status(500).json({
-      mensaje: "error en la petición a la base de datos",
-    });
   }
 };
 
