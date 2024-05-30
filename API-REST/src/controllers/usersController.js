@@ -24,32 +24,12 @@ export const getAllUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { email, password, confirmPassword, role } = req.body;
-    const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/;
-
-    if (!email || !password || !role) {
-      res.status(400).json({
-        mensaje: "toda la información es necesaria",
-      });
-    }
-
-    if (!regex.test(password)) {
-      res.status(400).json({
-        mensaje:
-          "Contraseña Inválida, debe contener al menos mínimo con 5 carácteres, un número y un carácter en mayúscula",
-      });
-    }
-
-    if (password !== confirmPassword) {
-      res.status(401).json({
-        mensaje: "Las contraseñas no coinciden",
-      });
-    }
+    const { EMAIL, PASSWORD, ROLE } = req.body;
 
     const query =
-      "INSERT INTO `Users`(`email`, `password`, `role`) VALUES (?, ?, ?)";
+      "INSERT INTO `USUARIOS`(`EMAIL`, `PASSSWORD`, `ROLE`) VALUES (?,?,?)";
 
-    await connection.query(query, [email, password, role], (err, results) => {
+    await connection.query(query, [EMAIL, PASSWORD, ROLE], (err, results) => {
       if (err) {
         console.error("Error al crear usuario: ", err);
         res.status(500).send("Error al crear usuario");
