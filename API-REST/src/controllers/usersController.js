@@ -29,7 +29,7 @@ export const createUser = async (req, res) => {
     const query =
       "INSERT INTO `USUARIOS`(`EMAIL`, `PASSSWORD`, `ROLE`) VALUES (?,?,?)";
 
-    await connection.query(query, [EMAIL, PASSSWORD, ROLE], (err, results) => {
+    await connection.query(query, [EMAIL, PASSWORD, ROLE], (err, results) => {
       if (err) {
         console.error("Error al crear usuario: ", err);
         res.status(500).send("Error al crear usuario");
