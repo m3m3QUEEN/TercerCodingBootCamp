@@ -74,13 +74,13 @@ export const loginUser = async (req, res) => {
   }
 };
 
-// Funcion para cerrar sesion
-export const logoutUser = async (req, res) => {
+const JWT_SECRET = "your_secret_key";
+
+export const login = async (req, res) => {  
   try {
     const { EMAIL, PASSWORD, ROLE } = req.body;
 
-    const query =
-      "INSERT INTO `USUARIOS`(`EMAIL`, `PASSSWORD`, `ROLE`) VALUES (?,?,?)";
+    const query = "SELECT * FROM `USUARIOS` WHERE `EMAIL` = ?";
 
     await connection.query(query, [EMAIL, PASSWORD, ROLE], (err, results) => {
       if (err) {

@@ -22,7 +22,7 @@ export const authenticateToken = (req, res, next) => {
 
   jwt.verify(token, process.env.SECRET_KEY, (err, user) => {
     if (err) {
-      return res.status(403).json({ error: "Invalid Token" });
+      return res.status(403).json({ error: "Por favor inicia sesión" });
     }
     req.user = user;
     next();
