@@ -1,3 +1,5 @@
+
+
 import express from "express";
 import connection from "../../DBConnection.js";
 
@@ -75,4 +77,3 @@ export const deleteType = (req, res) => {
     res.send('Se elimino el Type');
   });
 };
-
