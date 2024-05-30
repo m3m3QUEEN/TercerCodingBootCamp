@@ -1,3 +1,5 @@
+
+
 import express from "express";
 import connection from "../../DBConnection.js";
 
@@ -21,7 +23,7 @@ export const createType = async (req, res) => {
   try {
     const { NAME, ELEMENT, STREGHT, WEAKNESS } = req.body;
     const query =
-      "INSERT INTO `USUARIOS`(`NAME`, `ELEMENT`, `STREGHT`,`WEAKNESS`) ALUES (?,?,?,?)";
+      "INSERT INTO `Types`(`NAME`, `ELEMENT`, `STRENGHT`,`WEAKNESS`) VALUES (?,?,?,?)";
 
     connection.query(
       query,
@@ -44,3 +46,4 @@ export const createType = async (req, res) => {
 
 
    
+
