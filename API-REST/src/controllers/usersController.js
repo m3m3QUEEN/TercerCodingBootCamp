@@ -83,11 +83,11 @@ export const createUser = async (req, res) => {
 
 const JWT_SECRET = "your_secret_key";
 
-export const login = async (req, res) => {  
+export const login = async (req, res) => {
   try {
     const { EMAIL, PASSWORD } = req.body;
 
-    const query = "SELECT * FROM `USUARIOS` WHERE `EMAIL` = ?";
+    const query = "SELECT * FROM `Users` WHERE `EMAIL` = ?";
 
     await connection.query(query, [EMAIL], (err, results) => {
       if (err) {
