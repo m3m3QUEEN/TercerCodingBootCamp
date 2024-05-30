@@ -1,4 +1,3 @@
-
 // endpoints/users.js
 
 import express from "express";

@@ -1,4 +1,5 @@
 
+
 import express from "express";
 import connection from "../../DBConnection.js";
 
@@ -45,3 +46,4 @@ export const createType = async (req, res) => {
 
 
    
+

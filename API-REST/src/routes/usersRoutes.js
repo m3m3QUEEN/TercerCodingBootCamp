@@ -9,4 +9,3 @@ router.get("/", getAllUsers);
 router.post("/register", createUser);
 
 export default router;
-
