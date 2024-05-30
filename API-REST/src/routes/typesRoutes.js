@@ -1,8 +1,8 @@
 // typesRoutes.js
 
 import express from "express";
+
 import { createType, getAllTypes } from "../controllers/typesController.js";
-import { isAdmin, isAuthenticated } from "../middleware/authMiddleware.js";
 
 const router = express.Router();
 
@@ -11,5 +11,7 @@ router.post("/", isAuthenticated, isAdmin, createType);
 
 // Ruta para obtener todos los tipos
 router.get("/", getAllTypes);
+router.delete("/:id", deleteType)
+router.put("/:id", updateType )
 
 export default router;
