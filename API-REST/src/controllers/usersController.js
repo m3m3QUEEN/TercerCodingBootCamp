@@ -42,3 +42,28 @@ export const createUser = async (req, res) => {
     console.error(error);
   }
 };
+
+export const updateUsers = async (req, res) => {
+  try {
+    const { id, EMAIL, PASSWORD, ROLE } = req.body;
+
+    const query =
+      "UPDATE `USUARIOS` SET `EMAIL` = ?, `PASSWORD` = ?, `ROLE` = ? WHERE `id` = ?";
+
+    connection.query(
+      query,
+      [EMAIL, PASSWORD, ROLE, id],
+      (err, results) => {
+        if (err) {
+          console.error("Error al actualizar usuario: ", err);
+          res.status(500).send("Error al actualizar usuario");
+        } else {
+          res.send("Usuario actualizado exitosamente");
+          console.log("Usuario actualizado exitosamente.");
+        }
+      }
+    );
+  } catch (error) {
+    console.error(error);
+  }
+};
