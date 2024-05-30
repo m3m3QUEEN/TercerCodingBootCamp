@@ -21,7 +21,7 @@ export const createType = async (req, res) => {
   try {
     const { name, element, strength, weakness } = req.body;
     const query =
-      "INSERT INTO `Types`(`name`, `element`, `strength`,`weakness`) VALUES (?,?,?,?)";
+      "INSERT INTO `USUARIOS`(`NAME`, `ELEMENT`, `STREGHT`,`WEAKNESS`) ALUES (?,?,?,?)";
 
     connection.query(
       query,
