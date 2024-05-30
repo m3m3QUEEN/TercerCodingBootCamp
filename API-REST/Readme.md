@@ -1,23 +1,28 @@
-# Correcciones API REST Grupo 1 (Correspondientes a la rama "Juan-Jose" la cual al momento de clonar el repositorio era la rama que iba mas avanzada)
-Todas las indicaciones dadas aquí nos serán las únicas que deberán corregir:
+Claro, aquí tienes el texto corregido:
+
+# Correcciones API REST Grupo 1 (Correspondientes a la rama "Juan-Jose" la cual al momento de clonar el repositorio era la rama que iba más avanzada)
+
+Todas las indicaciones dadas aquí no serán las únicas que deberán corregir:
 
 ## Rutas
-Solo se usa una ruta en la api la cual es la ruta de users, las demas rutas nunca se usan.
 
-```` javascript
+Solo se usa una ruta en la API, la cual es la ruta de `users`. Las demás rutas nunca se usan.
+
+````javascript
     app.use("/users", userRoutes); // Usa las rutas de usuarios
 ````
 
-Por lo cual no se revisarón las rutas que no se usan.
+Por lo cual no se revisaron las rutas que no se usan.
 
 ## Esquemas y Modelos
 
 El proyecto actualmente no cuenta con esquemas ni con modelos. Los esquemas son necesarios para validar los datos de entrada y garantizar que cumplen con las especificaciones requeridas. Por otro lado, los modelos son fundamentales para definir la estructura de los datos en nuestra base de datos.
 
 ## Registro
-En el contrato se pedia que `Por defecto, todos los usuarios que se registren serán de tipo User`, pero se me pide que ingrese mi tipo de rol para registrarme, esto no es correcto.
 
-```` javascript
+En el contrato se pedía que "por defecto, todos los usuarios que se registren serán de tipo User", pero se me pide que ingrese mi tipo de rol para registrarme, esto no es correcto.
+
+````javascript
 export const createUser = async (req, res) => {
   try {
     const { email, password, role } = req.body;
@@ -40,48 +45,46 @@ export const createUser = async (req, res) => {
   }
 };
 ````
-Sólo se debería pedir `Email`, `Password` y segun el requisito `Debe haber contraseña y confirmar contraseña, para evitar errores en la contraseña por parte del usuario.
-` se debe pedir tambien `ConfirmPassword`.
 
+Solo se debería pedir `Email` y `Password`. Según el requisito "debe haber contraseña y confirmar contraseña, para evitar errores en la contraseña por parte del usuario", se debe pedir también `ConfirmPassword`.
 
 ## Middleware
 
-### Autentificación
-```` javascript
+### Autenticación
+
+````javascript
 export const isAuthenticated = (req, res, next) => {
-    // Verificar si el usuario esta autenticado (por ejemplo, si existe un token en las cookies)
+    // Verificar si el usuario está autenticado (por ejemplo, si existe un token en las cookies)
     if (req.cookies.token) {
-      return next(); // Si el usuario esta autenticado, pasa al siguiente middleware
+      return next(); // Si el usuario está autenticado, pasa al siguiente middleware
     } else {
-      return res.status(401).json({ message: "No autorizado" }); // Si no esta autenticado, devuelve un error de no autorizado
+      return res.status(401).json({ message: "No autorizado" }); // Si no está autenticado, devuelve un error de no autorizado
     }
   };
-  
 ````
 
-- Si bien el middleware cumple su funcionalidad, es una mala practica solo er si hay un token el las cookies.
-
-Si el token es inválido o si el usuario no existe, se devuelve un error de no autentificado. Si el token es válido y el usuario existe el usuario estaría correctamente autentificado.
+Si bien el middleware cumple su funcionalidad, es una mala práctica solo verificar si hay un token en las cookies. Si el token es inválido o si el usuario no existe, se debe devolver un error de no autenticado. Si el token es válido y el usuario existe, el usuario estaría correctamente autenticado.
 
 ### Autorización
 
-```` javascript
+````javascript
   export const isAdmin = (req, res, next) => {
     // Verificar si el usuario es administrador
-    if (req.user && req.user.role === "Gym Leader") {
+    if (req.user && req.user.role === "Admin") {
       return next(); // Si el usuario es administrador, pasa al siguiente middleware
     } else {
       return res.status(403).json({ message: "Acceso prohibido" }); // Si no es administrador, devuelve un error de acceso prohibido
     }
   };
 ````
-El uso de este middleware es correcto, pero teniendo en cuenta que un requisito es que los tipo de usuario son `(Admin o User)` el tipo de usuario `Gym Leader` es incorrecto.
 
+El uso de este middleware es correcto, pero teniendo en cuenta que un requisito es que los tipos de usuario son "Admin" o "User", el tipo de usuario "Gym Leader" es incorrecto.
 
-## Conexíon con la base de datos
-Si bien la conexión es correcta y bien implementada:
+## Conexión con la base de datos
 
-```` javascript 
+Si bien la conexión es correcta y está bien implementada:
+
+````javascript 
 import mysql from "mysql";
 
 const connection = mysql.createConnection({
@@ -89,22 +92,17 @@ const connection = mysql.createConnection({
     user: "umvdbag5uqsb4npg",
     password: "1EZ0l48ZJCWTbLzvZbru",
     database: "btgwscae1gfaouvhxykt",
-})
+});
 
-connection.connect((err)=>{
-    if(err){
+connection.connect((err) => {
+    if (err) {
         console.error("No se pudo conectar con la base de datos," + err);
         return;
     }
-    console.log("conexión exitosa.")
-})
+    console.log("Conexión exitosa.");
+});
 
 export default connection;
-
 ````
 
 Se sugiere que usen variables de entorno para proteger la información sensible como el host, el usuario, la contraseña y el nombre de la base de datos. Las variables de entorno son una excelente manera de proteger la información sensible y de configurar diferentes entornos (por ejemplo, desarrollo, pruebas, producción).
-
-
-
-
