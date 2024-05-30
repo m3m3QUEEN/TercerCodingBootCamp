@@ -1,44 +1,59 @@
-// endpoints/users.js
-
 import express from "express";
-import connection from "../../DBConnection.js"; // Asegúrate de ajustar la ruta de acuerdo a la ubicación de tu archivo de conexión
+import cookieParser from "cookie-parser";
+import jwt from "jsonwebtoken";
+import connection from "../../DBConnection.js";
+import { v4 as uuidv4 } from 'uuid';
 
-export const getAllUsers = async (req, res) => {
+const app = express();
+app.use(express.json());
+app.use(cookieParser());
+
+const JWT_SECRET = "your_secret_key"; // Cambia esto por una clave secreta segura en un entorno de producción
+
+export const login = async (req, res) => {
   try {
-    const query = "SELECT * FROM `USUARIOS`";
-    await connection.query(query, (err, results) => {
+    const { EMAIL, PASSWORD } = req.body;
+    
+    const query = "SELECT * FROM `USUARIOS` WHERE `EMAIL` = ?";
+    
+    await connection.query(query, [EMAIL], (err, results) => {
       if (err) {
-        console.error("Error al encontrar los usuarios: " + err);
-        res.status(500).send("Error al encontrar los usuarios");
+        console.error("Error al realizar el inicio de sesión: ", err);
+        res.status(500).send("Error al realizar el inicio de sesión");
       } else {
-        res.send(results);
-      }
-    });
-  } catch (error) {
-    console.error(error, "error");
-    res.status(500).json({
-      mensaje: "error en la petición a la base de datos",
-    });
-  }
-};
-
-export const createUser = async (req, res) => {
-  try {
-    const { EMAIL, PASSWORD, ROLE } = req.body;
-
-    const query =
-      "INSERT INTO `USUARIOS`(`EMAIL`, `PASSSWORD`, `ROLE`) VALUES (?,?,?)";
-
-    await connection.query(query, [EMAIL, PASSSWORD, ROLE], (err, results) => {
-      if (err) {
-        console.error("Error al crear usuario: ", err);
-        res.status(500).send("Error al crear usuario");
-      } else {
-        res.send("Usuario creado");
-        console.log("Usuario registrado exitosamente.");
+        if (results.length === 0) {
+          res.status(401).send("Credenciales incorrectas");
+        } else {
+          const user = results[0];
+          if (user.PASSWORD === PASSWORD) {
+            const sessionId = uuidv4();
+            const token = jwt.sign({ userId: user.id }, JWT_SECRET); // Generar token JWT
+            res.cookie("token", token, { httpOnly: true }); // Establecer el token en una cookie
+            res.send({ message: "Inicio de sesión exitoso", sessionId });
+            console.log("Usuario ha iniciado sesión exitosamente.");
+          } else {
+            res.status(401).send("Credenciales incorrectas");
+          }
+        }
       }
     });
   } catch (error) {
     console.error(error);
+    res.status(500).json({
+      mensaje: "Error en la petición a la base de datos",
+    });
+  }
+};
+
+export const logout = async (req, res) => {
+  try {
+    res.clearCookie("token"); // Borrar la cookie que contiene el token
+    res.send("Sesión cerrada exitosamente");
+    console.log("Sesión cerrada exitosamente.");
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({
+      mensaje: "Error al cerrar sesión",
+    });
   }
 };
