@@ -1,5 +1,3 @@
-Claro, aquí tienes el texto corregido:
-
 # Correcciones API REST Grupo 1 (Correspondientes a la rama "Juan-Jose" la cual al momento de clonar el repositorio era la rama que iba más avanzada)
 
 Todas las indicaciones dadas aquí no serán las únicas que deberán corregir:
