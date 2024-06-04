@@ -26,15 +26,15 @@ export const getAllUsers = async (req, res) => {
 
 export const createUser = async (req, res) => {
   try {
-    const { email, password, confirmPassword, role } = req.body;
+    const { email, password, confirmPassword } = req.body;
     const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/;
 
-    if (!email || !password || !role) {
+    if (!email || !password) {
       return res.status(400).json({
         mensaje: "Toda la información es necesaria",
       });
     }
-
+    const role = "user";
     if (!regex.test(password)) {
       return res.status(400).json({
         mensaje:
