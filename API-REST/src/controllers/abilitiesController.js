@@ -1,7 +1,6 @@
 import express from "express";
 import connection from "../../DBConnection.js";
-
-
+import { abilitySchema } from "../utils/schemas.js";
 
 export const getAllAbilities = async (req, res) => {
   try {
@@ -21,6 +20,11 @@ export const getAllAbilities = async (req, res) => {
 
 export const createAbilities = async (req, res) => {
   try {
+    const { error } = abilitySchema.validate(req.body);
+    if (error) {
+      return res.status(400).json({ error: error.details[0].message });
+    }
+
     const { NAME, POWER, accuracy, effect } = req.body;
     const query =
       "INSERT INTO `Abilities`(`NAME`, `POWER`, `accuracy`,`effect`) VALUES (?,?,?,?)";
