@@ -23,24 +23,30 @@ export const getAllUsers = async (req, res) => {
 // Funcion para comparar contraseñas
 const comparePasswords = async (plainPassword, hashedPassword) => {
   try {
-      // Comparar la contraseña proporcionada con el hash almacenado en la base de datos
-      const match = await bcrypt.compare(plainPassword, hashedPassword);
-      return match;
-  } catch (error) {
-      console.error('Error al comparar contraseñas:', error);
-      throw error;
-  }
-};
+    const { email, password, confirmPassword, role } = req.body;
+    const regex = /^(?=.*[A-Z])(?=.*\d)[A-Za-z\d]{5,}$/;
 
-export { comparePasswords };
+    if (!email || !password || !role) {
+      return res.status(400).json({
+        mensaje: "Toda la información es necesaria",
+      });
+    }
 
-// Funcion para iniciar sesion
-export const loginUser = async (req, res) => {
-  try {
-    const { email, password } = req.body;
+    if (!regex.test(password)) {
+      return res.status(400).json({
+        mensaje:
+          "Contraseña Inválida, debe contener al menos mínimo con 5 caracteres, un número y un carácter en mayúscula",
+      });
+    }
 
-    const query = "SELECT * FROM `Users` WHERE `email` = ? LIMIT 1";
-    connection.query(query, [email], async (err, results) => {
+    if (password !== confirmPassword) {
+      return res.status(401).json({
+        mensaje: "Las contraseñas no coinciden",
+      });
+    }
+
+    const emailQuery = "SELECT * FROM `Users` WHERE `email` = ?";
+    connection.query(emailQuery, [email], (err, results) => {
       if (err) {
         console.error("Error al buscar usuario: " + err);
         return res.status(500).json({ message: "Error en el servidor" });

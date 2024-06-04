@@ -18,7 +18,7 @@ El proyecto actualmente no cuenta con esquemas ni con modelos. Los esquemas son 
 
 ## Registro
 
-En el contrato se pedía que "por defecto, todos los usuarios que se registren serán de tipo User", pero se me pide que ingrese mi tipo de rol para registrarme, esto no es correcto.
+En el contrato se pedía que "por defecto, todos los usuarios que se registren serán de tipo User", pero se me pide que ingrese mi tipo de rol para registrarme, esto no es correcto. R// CORREGIDO
 
 ````javascript
 export const createUser = async (req, res) => {
@@ -44,7 +44,7 @@ export const createUser = async (req, res) => {
 };
 ````
 
-Solo se debería pedir `Email` y `Password`. Según el requisito "debe haber contraseña y confirmar contraseña, para evitar errores en la contraseña por parte del usuario", se debe pedir también `ConfirmPassword`.
+Solo se debería pedir `Email` y `Password`. Según el requisito "debe haber contraseña y confirmar contraseña, para evitar errores en la contraseña por parte del usuario", se debe pedir también `ConfirmPassword`. R// CORREGIDO
 
 ## Middleware
 
@@ -61,7 +61,7 @@ export const isAuthenticated = (req, res, next) => {
   };
 ````
 
-Si bien el middleware cumple su funcionalidad, es una mala práctica solo verificar si hay un token en las cookies. Si el token es inválido o si el usuario no existe, se debe devolver un error de no autenticado. Si el token es válido y el usuario existe, el usuario estaría correctamente autenticado.
+Si bien el middleware cumple su funcionalidad, es una mala práctica solo verificar si hay un token en las cookies. Si el token es inválido o si el usuario no existe, se debe devolver un error de no autenticado. Si el token es válido y el usuario existe, el usuario estaría correctamente autenticado. R// CORREGIDO
 
 ### Autorización
 
@@ -76,7 +76,7 @@ Si bien el middleware cumple su funcionalidad, es una mala práctica solo verifi
   };
 ````
 
-El uso de este middleware es correcto, pero teniendo en cuenta que un requisito es que los tipos de usuario son "Admin" o "User", el tipo de usuario "Gym Leader" es incorrecto.
+El uso de este middleware es correcto, pero teniendo en cuenta que un requisito es que los tipos de usuario son "Admin" o "User", el tipo de usuario "Gym Leader" es incorrecto. 
 
 ## Conexión con la base de datos
 
