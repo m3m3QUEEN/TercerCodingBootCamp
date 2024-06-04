@@ -16,7 +16,7 @@ export const adminRolValidation = async (req, res, next) => {
 
 
 export const authenticateToken = (req, res, next) => {
-  const token = req.cookies && req.cookies.token; // Verificar si req.cookies está definido
+  const token = req.cookies && req.cookies.token;
 
   if (!token) {
     return res.status(401).json({ error: "Por favor inicia sesión" });
