@@ -7,7 +7,7 @@ Todas las indicaciones dadas aquí no serán las únicas que deberán corregir:
 Solo se usa una ruta en la API, la cual es la ruta de `users`. Las demás rutas nunca se usan.
 
 ````javascript
-    app.use("/users", userRoutes); // Usa las rutas de usuarios
+    app.use("/users", userRoutes); // Usa las rutas de usuarioss
 ````
 
 Por lo cual no se revisaron las rutas que no se usan.
